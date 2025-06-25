@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Surat Cinta Rahasia 💌</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle, #ffdde1, #ee9ca7);
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      color: #fff;
+    }
+
+    .hearts {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff0055;
+      font-size: 24px;
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg) translateY(-120px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateY(-120px) rotate(-360deg);
+      }
+    }
+
+    .text {
+      position: absolute;
+      top: 45%;
+      width: 100%;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 0 0 10px #ff4f88;
+      animation: fadein 3s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadein {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hearts" id="hearts"></div>
+  <div class="text">Kaysan Kontol 🥺❤️</div>
+
+  <script>
+    const heartContainer = document.getElementById('hearts');
+
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      const angle = (360 / 15) * i;
+      heart.style.left = '50%';
+      heart.style.top = '50%';
+      heart.style.transform = `rotate(${angle}deg) translateY(-120px) rotate(-${angle}deg)`;
+      heartContainer.appendChild(heart);
+    }
+  </script>
+
+</body>
+</html>

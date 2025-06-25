@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Ipi sang Perakit</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+      text-align: center;
+      padding: 40px;
+      overflow: hidden;
+      height: 100vh;
+      position: relative;
+    }
+    .card {
+      background: #2a2a2a;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    img {
+      width: 120px;
+      border-radius: 50%;
+      border: 3px solid #00ffcc;
+    }
+    h1 {
+      color: #00ffcc;
+    }
+    .bio {
+      margin-top: 15px;
+      font-style: italic;
+    }
+    .btn {
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      position: absolute;
+      transition: left 0.4s ease, top 0.4s ease;
+    }
+    .btn-redirect {
+      margin-top: 30px;
+      background-color: pink;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+    }
+    .response-text {
+      margin-top: 20px;
+      font-size: 1.1em;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .visible {
+      opacity: 1;
+    }
+    .emot {
+      position: absolute;
+      font-size: 1.8em;
+      pointer-events: none;
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <img src="arena breakout PP.jpeg" alt="Foto Ipi (placeholder)">
+    <h1>Who ANF</h1>
+    <p class="bio">Perakit elektronik, pemburu ide, dan orang tolol yg mau pintar 😤</p>
+    <p id="respon" class="response-text"></p>
+    <button id="bucinBtn" class="btn-redirect" onclick="location.href='bucin.html'">KLIK AKU CEPET!! 😳</button>
+  </div>
+
+  <button class="btn" id="tombol">Kenalan Dulu</button>
+
+  <script>
+    let hindarCount = 0;
+    let bolehKlik = false;
+
+    const tombol = document.getElementById('tombol');
+    const respon = document.getElementById('respon');
+    const bucinBtn = document.getElementById('bucinBtn');
+
+    function getRandomPos() {
+      const maxX = window.innerWidth - 150;
+      const maxY = window.innerHeight - 70;
+      const x = Math.floor(Math.random() * maxX);
+      const y = Math.floor(Math.random() * maxY);
+      return { x, y };
+    }
+
+    function showEmot(x, y) {
+      const emots = ['😏', '😆', '🙃', '😜', '👀', '😂'];
+      const emot = document.createElement('div');
+      emot.classList.add('emot');
+      emot.style.left = `${x}px`;
+      emot.style.top = `${y}px`;
+      emot.innerText = emots[Math.floor(Math.random() * emots.length)];
+      document.body.appendChild(emot);
+
+      setTimeout(() => {
+        emot.remove();
+      }, 1000);
+    }
+
+    function kaburkanTombol() {
+      if (hindarCount < 3) {
+        const { x, y } = getRandomPos();
+        tombol.style.left = x + 'px';
+        tombol.style.top = y + 'px';
+        showEmot(x, y);
+        hindarCount++;
+        if (hindarCount >= 3) {
+          bolehKlik = true;
+        }
+      }
+    }
+
+    tombol.addEventListener('mouseenter', kaburkanTombol);
+    tombol.addEventListener('touchstart', kaburkanTombol);
+
+    tombol.addEventListener('click', () => {
+      if (bolehKlik) {
+        respon.textContent = "Akhirnya kamu bisa klik aku... kamu terlalu gigih, lanang sekarang lanjut 😆";
+        respon.classList.add('visible');
+        tombol.style.position = 'static';
+        tombol.disabled = true;
+        tombol.innerText = "Udah Klik 😎";
+
+        // Munculin tombol bucin
+        bucinBtn.style.display = 'inline-block';
+      }
+    });
+  </script>
+
+</body>
+</html>
