@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Ipi sang Perakit</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kenalan Dulu</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -22,18 +22,6 @@
       max-width: 500px;
       margin: auto;
       box-shadow: 0 0 15px rgba(0,0,0,0.4);
-    }
-    img {
-      width: 120px;
-      border-radius: 50%;
-      border: 3px solid #00ffcc;
-    }
-    h1 {
-      color: #00ffcc;
-    }
-    .bio {
-      margin-top: 15px;
-      font-style: italic;
     }
     .btn {
       background-color: #00ffcc;
@@ -73,26 +61,17 @@
       pointer-events: none;
       animation: fadeUp 1s ease-out forwards;
     }
-
     @keyframes fadeUp {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(-50px);
-      }
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-50px); }
     }
   </style>
 </head>
 <body>
 
   <div class="card">
-    <img src="arena breakout PP.jpeg" alt="Foto Ipi (placeholder)">
-    <h1>Who ANF</h1>
-    <p class="bio">Perakit elektronik, pemburu ide, dan orang tolol yg mau pintar 😤</p>
-    <p id="respon" class="response-text"></p>
+    <h1>Ipi ANF</h1>
+    <p class="response-text" id="respon"></p>
     <button id="bucinBtn" class="btn-redirect" onclick="location.href='bucin.html'">KLIK AKU CEPET!! 😳</button>
   </div>
 
@@ -109,9 +88,10 @@
     function getRandomPos() {
       const maxX = window.innerWidth - 150;
       const maxY = window.innerHeight - 70;
-      const x = Math.floor(Math.random() * maxX);
-      const y = Math.floor(Math.random() * maxY);
-      return { x, y };
+      return {
+        x: Math.floor(Math.random() * maxX),
+        y: Math.floor(Math.random() * maxY)
+      };
     }
 
     function showEmot(x, y) {
@@ -122,41 +102,32 @@
       emot.style.top = `${y}px`;
       emot.innerText = emots[Math.floor(Math.random() * emots.length)];
       document.body.appendChild(emot);
-
-      setTimeout(() => {
-        emot.remove();
-      }, 1000);
+      setTimeout(() => emot.remove(), 1000);
     }
 
     function kaburkanTombol() {
       if (hindarCount < 3) {
         const { x, y } = getRandomPos();
-        tombol.style.left = x + 'px';
-        tombol.style.top = y + 'px';
+        tombol.style.left = `${x}px`;
+        tombol.style.top = `${y}px`;
         showEmot(x, y);
         hindarCount++;
-        if (hindarCount >= 3) {
-          bolehKlik = true;
-        }
+        if (hindarCount >= 3) bolehKlik = true;
       }
     }
 
     tombol.addEventListener('mouseenter', kaburkanTombol);
     tombol.addEventListener('touchstart', kaburkanTombol);
-
     tombol.addEventListener('click', () => {
       if (bolehKlik) {
-        respon.textContent = "Akhirnya kamu bisa klik aku... kamu terlalu gigih, lanang sekarang lanjut 😆";
+        respon.textContent = "Akhirnya kamu bisa klik aku... 😆";
         respon.classList.add('visible');
         tombol.style.position = 'static';
         tombol.disabled = true;
         tombol.innerText = "Udah Klik 😎";
-
-        // Munculin tombol bucin
         bucinBtn.style.display = 'inline-block';
       }
     });
   </script>
-
 </body>
 </html>
